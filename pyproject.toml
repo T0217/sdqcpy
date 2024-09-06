@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sdqcpy"
+version = "0.1.0"
+description = "SDQCPy is a comprehensive Python package designed for synthetic data management."
+authors = [
+    {name = "T0217"},
+]
+readme = "README.md"
+requires-python = ">=3.11"  
+keywords = ["synthetic data", "data quality", "data validation"]
+license = {text = ""}
+classifiers = [
+    "Development Status :: 1 - Planning",
+	"Operating System :: Microsoft :: Windows :: Windows 11",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    
+]
+
+[project.urls]
+"Homepage" = "https://github.com/T0217/sdqcpy"
+"Bug Tracker" = "https://github.com/T0217/sdqcpy/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
