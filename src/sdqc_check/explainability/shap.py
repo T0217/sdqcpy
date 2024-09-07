@@ -40,7 +40,7 @@ class ShapFeatureImportance(BaseFeatureImportance):
             explainer = shap.TreeExplainer(
                 model=self.model,
                 data=self.X_train,
-                model_output='proability'
+                model_output='probability'
             )
             shap_values = explainer.shap_values(self.X_test)
 
