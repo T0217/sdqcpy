@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raw vs Synthetic Data Comparison</title>
+    <style>
+        {% include "styles.css" %}
+    </style>
+</head>
+<body> 
+    <div class="container">
+        <div id="sidebar">
+            <h3>Catalogs</h3>
+            <ul>
+                <li><a href="#stats">Statistical Metrics</a></li>
+                <li><a href="#classification-metrics">Classification Metrics</a></li>
+                <li><a href="#feature-importance">Feature Importance</a></li>
+                <li><a href="#causal-comparison">Causal Comparison</a></li>
+                <li><a href="#summary">Summary</a></li>
+            </ul>
+        </div>
+        <div id="main-content">
+            <h1>Raw vs Synthetic Data Comparison</h1>
+            <div id="stats">
+                <h2>Statistical Metrics</h2>
+                <select id="column-type-select">
+                    <option value="">Select Column Type</option>
+                    <option value="categorical">Categorical</option>
+                    <option value="numerical">Numerical</option>
+                </select>
+                <div id="column-select-container">
+                    <select id="column-select" multiple disabled>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+                <div id="stats-content">
+                    <div id="test-results"></div>
+                    <div id="plot"></div>
+                </div>
+                <button id="more-info-btn">More Information</button>
+                <div id="more-info" style="display: none;">
+                    <table id="more-info-table">
+                        <thead>
+                            <tr>
+                                <th>Statistic</th>
+                                <th>Raw Data</th>
+                                <th>Synthetic Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table content will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="classification-metrics">
+                <h2>Classification Model Evaluation Metrics</h2>
+                <table id="metrics-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Accuracy</th>
+                            <th>Precision</th>
+                            <th>Recall</th>
+                            <th>F1 Score</th>
+                            <th>AUC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table content will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="feature-importance">
+                <h2>Feature Importance</h2>
+                <select id="fi-display-select">
+                    <option value="table">Table</option>
+                    <option value="visualization">Visualization</option>
+                </select>
+                <div id="fi-content">
+                    <table id="fi-table" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Importance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 特征重要性表格内容将在这里动态生成 -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <details>
+                                        <summary>Other Features (Importance &lt;= 0.01)</summary>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Feature</th>
+                                                    <th>Importance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="other-features-tbody">
+                                                <!-- 其他特征将在这里动态生成 -->
+                                            </tbody>
+                                        </table>
+                                    </details>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div id="fi-visualization" style="display: none;">
+                        <!-- 特征重要性可视化将在这里动态生成 -->
+                        <img id="fi-image" src="" alt="Feature Importance Visualization">
+                    </div>
+                </div>
+            </div>
+            
+            <div id="causal-comparison">
+                <h2>Causal Comparison</h2>
+                <div id="causal-plot"></div>
+                <div id="causal-metrics"></div>
+            </div>
+        
+            <div id="summary">
+                <h2>Summary</h2>
+                <p>To be implemented</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const allData = {{ json_data|safe }};
+    </script>
+    <script>
+        {% include "script.js" %}
+    </script>
+</body>
+</html>

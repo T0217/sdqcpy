@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px 0;
+    margin: 0 0 20px 0;
+    width: 100%;
+}
+
+h2 {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+#sidebar {
+    width: 200px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 240px;
+    box-sizing: border-box;
+}
+
+#stats-content {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+#test-results {
+    flex: 0 0 25%;
+    margin-right: 20px;
+}
+
+#plot img{
+    max-width: 100%;
+    height: auto;
+}
+
+#classification-metrics, #feature-importance, #causal-comparison, #summary {
+    width: 100%;
+}
+
+#metrics-table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar li {
+    margin-bottom: 10px;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: #333;
+}
+
+#sidebar a:hover {
+    color: #0066cc;
+}
+
+#column-type-select, #column-select-container {
+    width: 30%;
+    margin-bottom: 10px;
+}
+
+#column-select-container {
+    display: none;
+    width: 30%;
+}
+
+#column-type-select:not(:checked) ~ #column-select-container {
+    display: none;
+}
