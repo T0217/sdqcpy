@@ -63,15 +63,7 @@ class CausalAnalysis:
             )
 
     def compare_adjacency_matrices(self) -> None:
-        """
-        Compare the adjacency matrices of the raw and synthetic data using the selected causal discovery algorithm.
-        """
-        model = self._get_model(self.model_name)
-        raw_matrix, synthetic_matrix = self._compute_causal_matrices(
-            model,
-            self.raw_data,
-            self.synthetic_data
-        )
+        raw_matrix, synthetic_matrix = self.compute_causal_matrices()
         mt = MetricsDAG(raw_matrix, synthetic_matrix)
         return mt
 
@@ -98,7 +90,7 @@ class CausalAnalysis:
                 num_iter=1e4,
                 seed=self.random_seed,
                 device_type=self.device_type,
-                device_id=self.device_id
+                device_ids=self.device_id
             )
         elif model_name == 'grandag':
             return GraNDAG(
@@ -113,35 +105,33 @@ class CausalAnalysis:
                 epochs=4,
                 seed=self.random_seed,
                 device_type=self.device_type,
-                device_id=self.device_id
+                device_ids=self.device_id
             )
 
-    @staticmethod
-    def _compute_causal_matrices(
-            method: castle.common.BaseLearner,
-            data1: np.ndarray,
-            data2: np.ndarray
-    ) -> Tuple[np.ndarray, np.ndarray]:
+    def compute_causal_matrices(self) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Compute the causal matrices using the specified causal discovery method.
+        Compute causal matrices for raw and synthetic data using the specified causal discovery method.
 
         Parameters:
         -----------
-        method : castle.common.BaseLearner
-            The causal discovery method.
-        data1 : numpy.ndarray
-            The first input data for causal discovery.
-        data2 : numpy.ndarray
-            The second input data for causal discovery.
+        raw_data : np.ndarray
+            The raw input data for causal discovery.
+        synthetic_data : np.ndarray
+            The synthetic input data for causal discovery.
 
         Returns:
         --------
-        Tuple[numpy.ndarray, numpy.ndarray]
-            A tuple containing the causal matrices for data1 and data2.
+        Tuple[np.ndarray, np.ndarray]
+            A tuple containing the causal matrices for raw and synthetic data.
         """
-        method.learn(data1)
-        causal_matrix1 = method.causal_matrix
-        method.learn(data2)
-        causal_matrix2 = method.causal_matrix
+        model = self._get_model(self.model_name)
 
-        return causal_matrix1, causal_matrix2
+        # Compute causal matrix for raw data
+        model.learn(self.raw_data)
+        raw_causal_matrix = model.causal_matrix
+
+        # Compute causal matrix for synthetic data
+        model.learn(self.synthetic_data)
+        synthetic_causal_matrix = model.causal_matrix
+
+        return raw_causal_matrix, synthetic_causal_matrix

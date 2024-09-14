@@ -8,54 +8,102 @@
         {% include "styles.css" %}
     </style>
 </head>
-<body> 
+<body>
     <div class="container">
-        <div id="sidebar">
+        <!-- Sidebar navigation -->
+        <nav id="sidebar">
             <h3>Catalogs</h3>
             <ul>
-                <li><a href="#stats">Statistical Metrics</a></li>
+                <li>
+                    <a href="#stats">Statistical Metrics</a>
+                    <ul>
+                        <li><a href="#basic-stats">Basic Statistics</a></li>
+                        <li><a href="#correlation">Correlation</a></li>
+                    </ul>
+                </li>
                 <li><a href="#classification-metrics">Classification Metrics</a></li>
                 <li><a href="#feature-importance">Feature Importance</a></li>
                 <li><a href="#causal-comparison">Causal Comparison</a></li>
                 <li><a href="#summary">Summary</a></li>
             </ul>
-        </div>
-        <div id="main-content">
+        </nav>
+        
+        <!-- Main content area -->
+        <main id="main-content">
             <h1>Raw vs Synthetic Data Comparison</h1>
-            <div id="stats">
+            
+            <!-- Statistical Metrics Section -->
+            <section id="stats">
                 <h2>Statistical Metrics</h2>
-                <select id="column-type-select">
-                    <option value="">Select Column Type</option>
-                    <option value="categorical">Categorical</option>
-                    <option value="numerical">Numerical</option>
-                </select>
-                <div id="column-select-container">
-                    <select id="column-select" multiple disabled>
+                
+                <!-- Basic Statistics -->
+                <section id="basic-stats">
+                    <h3>Basic Statistics</h3>
+                    <select id="column-type-select">
+                        <option value="categorical">Categorical</option>
+                        <option value="numerical">Numerical</option>
+                    </select>
+                    <select id="column-select">
                         <!-- Options will be populated by JavaScript -->
                     </select>
-                </div>
-                <div id="stats-content">
-                    <div id="test-results"></div>
-                    <div id="plot"></div>
-                </div>
-                <button id="more-info-btn">More Information</button>
-                <div id="more-info" style="display: none;">
-                    <table id="more-info-table">
-                        <thead>
-                            <tr>
-                                <th>Statistic</th>
-                                <th>Raw Data</th>
-                                <th>Synthetic Data</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Table content will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
+                    <div id="stats-content">
+                        <div id="test-results"></div>
+                        <div id="plot"></div>
+                    </div>
+                    
+                    <!-- Templates for dynamic content -->
+                    <template id="column-stats-template">
+                        <div class="column-stats">
+                            <h3></h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </template>
+                    
+                    <template id="plot-template">
+                        <img src="" alt="">
+                    </template>
+
+                    <button id="more-info-btn">More Information</button>
+                    <div id="more-info" style="display: none;">
+                        <table id="more-info-table">
+                            <thead>
+                                <tr>
+                                    <th>Statistic</th>
+                                    <th>Raw Data</th>
+                                    <th>Synthetic Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Table content will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Correlation -->
+                <section id="correlation">
+                    <h3>Correlation</h3>
+                    <div id="correlation-column-select">
+                        <select id="correlation-column1-select"></select>
+                        <select id="correlation-column2-select"></select>
+                    </div>
+                    <div>
+                        <img id="correlation-image" src="" alt="Correlation Plot">
+                    </div>
+                </section>
+            </section>
             
-            <div id="classification-metrics">
+            <!-- Classification Metrics Section -->
+            <section id="classification-metrics">
                 <h2>Classification Model Evaluation Metrics</h2>
                 <table id="metrics-table">
                     <thead>
@@ -72,9 +120,10 @@
                         <!-- Table content will be populated by JavaScript -->
                     </tbody>
                 </table>
-            </div>
+            </section>
             
-            <div id="feature-importance">
+            <!-- Feature Importance Section -->
+            <section id="feature-importance">
                 <h2>Feature Importance</h2>
                 <select id="fi-display-select">
                     <option value="table">Table</option>
@@ -88,9 +137,7 @@
                                 <th>Importance</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- 特征重要性表格内容将在这里动态生成 -->
-                        </tbody>
+                        <tbody></tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="2">
@@ -103,9 +150,7 @@
                                                     <th>Importance</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="other-features-tbody">
-                                                <!-- 其他特征将在这里动态生成 -->
-                                            </tbody>
+                                            <tbody id="other-features-tbody"></tbody>
                                         </table>
                                     </details>
                                 </td>
@@ -113,29 +158,65 @@
                         </tfoot>
                     </table>
                     <div id="fi-visualization" style="display: none;">
-                        <!-- 特征重要性可视化将在这里动态生成 -->
                         <img id="fi-image" src="" alt="Feature Importance Visualization">
                     </div>
                 </div>
-            </div>
+            </section>
             
-            <div id="causal-comparison">
+            <!-- Causal Comparison Section -->
+            <section id="causal-comparison">
                 <h2>Causal Comparison</h2>
-                <div id="causal-plot"></div>
-                <div id="causal-metrics"></div>
-            </div>
-        
-            <div id="summary">
+                <img id="causal-plot" src="" alt="Compare Adjacency matrices">
+                <div id="causal-metrics">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metrics</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Causal comparison metrics will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Summary Section -->
+            <section id="summary">
                 <h2>Summary</h2>
-                <p>To be implemented</p>
-            </div>
-        </div>
+                <div id="summary-content">
+                    <p class="summary-intro">The summary of the dataset analysis is as follows:</p>
+                    <ol class="summary-list">
+                        <li>
+                            <span class="summary-item-title">Duplicate data detection</span>
+                            <div class="summary-item-content" id="duplicate-summary"></div>
+                        </li>
+                        <li>
+                            <span class="summary-item-title">Distribution discrepancy analysis</span>
+                            <div class="summary-item-content" id="distribution-summary"></div>
+                        </li>
+                        <li>
+                            <span class="summary-item-title">Classification performance evaluation</span>
+                            <div class="summary-item-content" id="classification-summary"></div>
+                        </li>
+                        <li>
+                            <span class="summary-item-title">Causal relationship analysis</span>
+                            <div class="summary-item-content" id="causal-summary"></div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+        </main>
     </div>
 
+    <!-- Load data and scripts -->
     <script>
+        // Load JSON data into a global variable
         const allData = {{ json_data|safe }};
     </script>
     <script>
+        // Include external JavaScript file
         {% include "script.js" %}
     </script>
 </body>

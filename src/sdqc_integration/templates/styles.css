@@ -1,20 +1,9 @@
+/* Global styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-}
-
-h1 {
-    text-align: center;
-    padding: 20px 0;
-    margin: 0 0 20px 0;
-    width: 100%;
-}
-
-h2 {
-    margin-top: 30px;
-    width: 100%;
 }
 
 .container {
@@ -23,6 +12,7 @@ h2 {
     min-height: 100vh;
 }
 
+/* Sidebar styles */
 #sidebar {
     width: 200px;
     padding: 20px;
@@ -35,6 +25,39 @@ h2 {
     box-sizing: border-box;
 }
 
+#sidebar h3 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar > ul > li {
+    margin-bottom: 10px;
+}
+
+#sidebar > ul > li > ul {
+    margin-top: 10px;
+}
+
+#sidebar li li {
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: #333;
+}
+
+#sidebar a:hover {
+    color: #0066cc;
+}
+
+/* Main content styles */
 #main-content {
     flex: 1;
     padding: 20px;
@@ -42,6 +65,22 @@ h2 {
     box-sizing: border-box;
 }
 
+/* Header styles */
+h1, h2 {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px 0;
+    margin: 0 0 20px 0;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+/* Statistical Metrics section styles */
 #stats-content {
     display: flex;
     flex-wrap: nowrap;
@@ -53,20 +92,12 @@ h2 {
     margin-right: 20px;
 }
 
-#plot img{
+#plot img {
     max-width: 100%;
     height: auto;
 }
 
-#classification-metrics, #feature-importance, #causal-comparison, #summary {
-    width: 100%;
-}
-
-#metrics-table {
-    width: 100%;
-    margin-top: 20px;
-}
-
+/* Table styles */
 table {
     border-collapse: collapse;
     width: 100%;
@@ -82,34 +113,85 @@ th {
     background-color: #f2f2f2;
 }
 
-#sidebar ul {
-    list-style-type: none;
-    padding: 0;
+/* Section styles */
+#classification-metrics, 
+#feature-importance, 
+#causal-comparison, 
+#summary {
+    width: 100%;
 }
 
-#sidebar li {
+#metrics-table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Causal Comparison section styles */
+#causal-plot {
+    margin-left: 150px;
+}
+
+/* Summary section styles */
+.summary-intro {
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
-#sidebar a {
-    text-decoration: none;
-    color: #333;
+.summary-list {
+    font-size: 17px;
+    padding-left: 20px;
 }
 
-#sidebar a:hover {
-    color: #0066cc;
+.summary-item-title {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
 }
 
-#column-type-select, #column-select-container {
-    width: 30%;
-    margin-bottom: 10px;
+.summary-item-content {
+    font-size: 16px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    line-height: 1.8;
 }
 
-#column-select-container {
-    display: none;
-    width: 30%;
+/* Feature Importance section styles */
+#fi-image {
+    margin-left: 100px;
 }
 
-#column-type-select:not(:checked) ~ #column-select-container {
-    display: none;
+/* Correlation section styles */
+#correlation-column-select {
+    margin-bottom: 20px;
+}
+
+#correlation-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* More Information styles */
+#more-info {
+    margin-top: 20px;
+}
+
+#more-info-table {
+    margin-top: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    #sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+    }
+
+    #main-content {
+        margin-left: 0;
+    }
 }
