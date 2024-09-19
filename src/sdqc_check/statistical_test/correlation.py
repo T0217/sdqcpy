@@ -37,8 +37,8 @@ def data_corr(data: pd.DataFrame, col_dtypes: Dict[str, List]) -> pd.DataFrame:
             # Cramer's V for categorical-categorical pairs
             crosstab = pd.crosstab(data[col1], data[col2])
             chi2, _, _, _ = chi2_contingency(crosstab)
-            n = np.sum(data.values)
-            min_dim = min(data.shape) - 1
+            n = np.sum(crosstab.to_numpy())
+            min_dim = min(crosstab.shape) - 1
             corr_coef = np.sqrt((chi2 / n) / min_dim)
             method = "Cramer's V"
         elif col1 in numerical_cols and col2 in numerical_cols:

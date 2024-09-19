@@ -15,9 +15,6 @@ function populateColumnSelect() {
             columnSelect.add(option);
         });
     }
-    
-    columnTypeSelect.dispatchEvent(new Event('change'));
-    columnSelect.dispatchEvent(new Event('change'));
 }
 
 // Show statistics for selected columns
@@ -146,9 +143,10 @@ function updateCorrelationPlot() {
     const column2Select = document.getElementById('correlation-column2-select');
     const correlationPlot = document.getElementById('correlation-image');
     
-    const selectedColumns = `${column1Select.value} vs ${column2Select.value}`;
-    correlationPlot.src = allData.correlation_plots[selectedColumns];
-    correlationPlot.alt = `${selectedColumns} Correlation Plot`;
+    const selectedColumns1 = `${column1Select.value} vs ${column2Select.value}`;
+    const selectedColumns2 = `${column2Select.value} vs ${column1Select.value}`;
+    correlationPlot.src = allData.correlation_plots[selectedColumns1] || allData.correlation_plots[selectedColumns2];
+    correlationPlot.alt = `${selectedColumns1} Correlation Plot`;
 }
 
 // Populate classification metrics table

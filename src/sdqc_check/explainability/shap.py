@@ -43,6 +43,10 @@ class ShapFeatureImportance(BaseFeatureImportance):
                 model_output='probability'
             )
             shap_values = explainer.shap_values(self.X_test)
+            if shap_values.ndim == 3:
+                shap_values = shap_values[:, :, 0]
+            else:
+                shap_values = shap_values
 
         shap_df = pd.DataFrame(data=shap_values,
                                columns=self.X_test.columns)

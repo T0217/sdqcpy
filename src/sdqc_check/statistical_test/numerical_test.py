@@ -79,6 +79,8 @@ class NumericalTest(BaseStatisticalTest):
         wasserstein_value = wasserstein_distance(raw_data, synthetic_data)
 
         # Calculate Hellinger distance
+        raw_data = raw_data/np.sum(raw_data)
+        synthetic_data = synthetic_data/np.sum(synthetic_data)
         hellinger_value = np.sqrt(
             np.sum((np.sqrt(raw_data) - np.sqrt(synthetic_data)) ** 2)
         ) / np.sqrt(2)

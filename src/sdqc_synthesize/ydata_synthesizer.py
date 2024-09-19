@@ -11,6 +11,7 @@ from .base_synthesizer import BaseSynthesizer
 # Ignore warnings
 warnings.filterwarnings('ignore')
 
+
 class YDataSynthesizer(BaseSynthesizer):
     """
     A synthesizer for generating synthetic data using various generative models from YData Synthetic.
@@ -75,7 +76,14 @@ class YDataSynthesizer(BaseSynthesizer):
         if isinstance(self.model_args, ModelParameters):
             self.model_args = self.model_args
         elif isinstance(self.model_args, Dict):
-            self.model_args = ModelParameters(**self.model_args)
+            model_args = {
+                'batch_size': 100,
+                'lr': 2e-4,
+                'betas': (0.5, 0.9),
+                'noise_dim': 64
+            }
+            model_args.update(self.model_args)
+            self.model_args = ModelParameters(**model_args)
         else:
             self.model_args = ModelParameters(
                 batch_size=100,
@@ -100,6 +108,8 @@ class YDataSynthesizer(BaseSynthesizer):
                 self.addition_args = {'n_critic': 10}
             elif self.model_name == 'dragan':
                 self.addition_args = {'n_discriminator': 3}
+            elif self.model_name == 'fast':
+                self.addition_args = {'random_state': self.random_seed}
             else:
                 self.addition_args = {}
         else:
@@ -162,7 +172,7 @@ class YDataSynthesizer(BaseSynthesizer):
         self.set_seed(self.random_seed)
 
         if isinstance(self.model_name, str):
-            return self.fit().sample(self.num_rows)
+            return self.fit().sample(self.num_rows)[:self.num_rows]
         elif isinstance(self.model_name, List):
             model_name = self.model_name.copy()
             model_args = self.model_args.copy() if self.model_args else None
@@ -189,6 +199,6 @@ class YDataSynthesizer(BaseSynthesizer):
                 else:
                     self.addition_args = None
 
-                result = self.fit().sample(self.num_rows)
+                result = self.fit().sample(self.num_rows)[:self.num_rows]
                 results[_model_name] = result
             return results

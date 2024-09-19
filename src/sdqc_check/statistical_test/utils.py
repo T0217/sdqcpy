@@ -53,7 +53,7 @@ def identify_data_types(data: pd.DataFrame) -> Dict[str, List[str]]:
             else:
                 col_dtype['numerical'].append(col_name)
         elif data_type == 'O':
-            if col_data.nunique() <= min(round(len(col_data) / 10), 10):
+            if col_data.nunique() <= max(round(len(col_data) / 10), 10):
                 col_dtype['categorical'].append(col_name)
             else:
                 col_dtype['problem'].append(col_name)

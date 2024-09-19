@@ -12,7 +12,6 @@ from sdqc_check import (
     ClassificationModel,
     ShapFeatureImportance,
     PFIFeatureImportance,
-    LimeFeatureImportance,
     data_corr,
     identify_data_types,
     CategoricalTest,
@@ -273,7 +272,7 @@ class SequentialAnalysis:
         Perform explainability analysis on the best model.
 
         This method applies the specified explainability algorithm
-        (SHAP, PFI, or LIME) to interpret the predictions of the best
+        (SHAP or PFI) to interpret the predictions of the best
         performing model.
 
         Parameters
@@ -309,7 +308,7 @@ class SequentialAnalysis:
         Returns
         -------
         Type
-            The explainability class (SHAP, PFI, or LIME) to be used.
+            The explainability class (SHAP or PFI) to be used.
 
         Raises
         ------
@@ -318,13 +317,12 @@ class SequentialAnalysis:
         """
         explainability_classes = {
             'shap': ShapFeatureImportance,
-            'pfi': PFIFeatureImportance,
-            'lime': LimeFeatureImportance
+            'pfi': PFIFeatureImportance
         }
         if self.explainability_algorithm not in explainability_classes:
             raise ValueError(
                 f"Algorithm {self.explainability_algorithm} not supported. "
-                "Please choose from 'shap', 'pfi', or 'lime'"
+                "Please choose from 'shap' or 'pfi'."
             )
         return explainability_classes[self.explainability_algorithm]
 
@@ -586,7 +584,7 @@ class SequentialAnalysis:
                 image_base64 = base64.b64encode(
                     buffer.getvalue()).decode('utf-8')
                 correlation_plots[f'{col1} vs {col2}'] = f'data:image/jpg;base64,{image_base64}'
-                correlation_plots[f'{col2} vs {col1}'] = f'data:image/jpg;base64,{image_base64}'
+
                 plt.close()
             elif col1 in column_types['numerical'] and col2 in column_types['numerical']:
                 # Generate scatter plots for numerical vs numerical
@@ -633,7 +631,6 @@ class SequentialAnalysis:
                     buffer.getvalue()
                 ).decode('utf-8')
                 correlation_plots[f'{col1} vs {col2}'] = f'data:image/jpg;base64,{image_base64}'
-                correlation_plots[f'{col2} vs {col1}'] = f'data:image/jpg;base64,{image_base64}'
 
                 plt.close()
 
@@ -679,7 +676,6 @@ class SequentialAnalysis:
                 image_base64 = base64.b64encode(
                     buffer.getvalue()).decode('utf-8')
                 correlation_plots[f'{col1} vs {col2}'] = f'data:image/jpg;base64,{image_base64}'
-                correlation_plots[f'{col2} vs {col1}'] = f'data:image/jpg;base64,{image_base64}'
 
                 plt.close()
 
@@ -726,7 +722,7 @@ class SequentialAnalysis:
                     buffer.getvalue()
                 ).decode('utf-8')
                 correlation_plots[f'{col1} vs {col2}'] = f'data:image/jpg;base64,{image_base64}'
-                correlation_plots[f'{col2} vs {col1}'] = f'data:image/jpg;base64,{image_base64}'
+
                 plt.close()
             else:
                 # Skip pairs that don't fit into the above categories

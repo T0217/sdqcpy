@@ -78,19 +78,25 @@ class ClassificationModel:
         Dict[str, object]
             A dictionary containing model names as keys and their corresponding initialized model objects as values.
         """
-        if self.model_params is None:
-            self.model_params = {
-                'svm': {},
-                'rf': {},
-                'xgb': {},
-                'lgbm': {}
-            }
+        for model_name in self.modelList:
+            if self.model_params is not None:
+                if model_name not in self.model_params:
+                    self.model_params[model_name] = {}
+            else:
+                self.model_params = {}
+                self.model_params[model_name] = {}
 
         for model_name in self.model_params.keys():
-            self.model_params[model_name]['random_state'] = self.random_seed
+            if 'random_state' not in self.model_params[model_name]:
+                self.model_params[model_name]['random_state'] = self.random_seed
+
             if model_name == 'svm':
-                self.model_params[model_name]['probability'] = True
-            if model_name == 'lgbm':
+                if ('probability' not in self.model_params[model_name]) or\
+                        (not self.model_params[model_name]['probability']):
+                    self.model_params[model_name]['probability'] = True
+
+            if (model_name == 'lgbm') and\
+                    ('verbose' not in self.model_params[model_name]):
                 self.model_params[model_name]['verbose'] = -1
 
         # Initialize models with parameters
@@ -119,7 +125,7 @@ class ClassificationModel:
         """
         model.fit(self.X_train, self.y_train)
         y_pred = model.predict(self.X_test)
-        y_prob = model.predict_proba(self.X_test)[:, 1]
+        y_proba = model.predict_proba(self.X_test)[:, 1]
 
         # Calculate performance metrics
         metrics = {
@@ -128,7 +134,7 @@ class ClassificationModel:
             'Precision': precision_score(self.y_test, y_pred),
             'Recall': recall_score(self.y_test, y_pred),
             'F1': f1_score(self.y_test, y_pred),
-            'AUC': roc_auc_score(self.y_test, y_prob)
+            'AUC': roc_auc_score(self.y_test, y_proba)
         }
 
         return pd.DataFrame([metrics])

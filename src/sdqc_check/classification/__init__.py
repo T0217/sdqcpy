@@ -1,4 +1,4 @@
-from .classify_model import ClassificationModel
+from .classification_model import ClassificationModel
 
 __all__ = [
     'ClassificationModel',
