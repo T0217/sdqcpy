@@ -1,7 +1,7 @@
 from .causality import CausalAnalysis
 from .classification import ClassificationModel
 from .explainability import (
-    ShapFeatureImportance, PFIFeatureImportance
+    ShapFeatureImportance, PFIFeatureImportance, ModelBasedFeatureImportance
 )
 from .statistical_test import (
     data_corr, identify_data_types, CategoricalTest, NumericalTest
@@ -13,6 +13,7 @@ __all__ = [
     'ClassificationModel',
     'ShapFeatureImportance',
     'PFIFeatureImportance',
+    'ModelBasedFeatureImportance',
     'data_corr',
     'identify_data_types',
     'CategoricalTest',

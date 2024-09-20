@@ -4,7 +4,9 @@ from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
-from sdqc_check import ShapFeatureImportance, PFIFeatureImportance
+from sdqc_check import (
+    ShapFeatureImportance, PFIFeatureImportance, ModelBasedFeatureImportance
+)
 
 
 @pytest.fixture
@@ -22,7 +24,9 @@ def sample_data():
     return model, X_train, X_test, y_train, y_test
 
 
-@pytest.mark.parametrize("FeatureImportance", [ShapFeatureImportance, PFIFeatureImportance])
+@pytest.mark.parametrize("FeatureImportance", [
+    ShapFeatureImportance, PFIFeatureImportance, ModelBasedFeatureImportance
+])
 def test_feature_importance(sample_data, FeatureImportance):
     model, X_train, X_test, y_train, y_test = sample_data
     importance = FeatureImportance(model, X_train, X_test, y_test)
@@ -38,7 +42,9 @@ def test_feature_importance(sample_data, FeatureImportance):
     assert result['importance'].is_monotonic_decreasing
 
 
-@pytest.mark.parametrize("FeatureImportance", [ShapFeatureImportance, PFIFeatureImportance])
+@pytest.mark.parametrize("FeatureImportance", [
+    ShapFeatureImportance, PFIFeatureImportance, ModelBasedFeatureImportance
+])
 def test_feature_importance_random_seed(sample_data, FeatureImportance):
     model, X_train, X_test, y_train, y_test = sample_data
     importance1 = FeatureImportance(

@@ -50,7 +50,7 @@ def test_causal_analysis_step(sample_data):
     assert isinstance(synthetic_matrix, np.ndarray)
 
 
-@pytest.mark.parametrize('explainability_algorithm', ['shap', 'pfi'])
+@pytest.mark.parametrize('explainability_algorithm', ['model_based', 'shap', 'pfi'])
 def test_explainability_step(sample_data, explainability_algorithm):
     raw_data, synthetic_data = sample_data
     analysis = SequentialAnalysis(

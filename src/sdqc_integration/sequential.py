@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from sdqc_check import (
     CausalAnalysis,
     ClassificationModel,
+    ModelBasedFeatureImportance,
     ShapFeatureImportance,
     PFIFeatureImportance,
     data_corr,
@@ -272,7 +273,7 @@ class SequentialAnalysis:
         Perform explainability analysis on the best model.
 
         This method applies the specified explainability algorithm
-        (SHAP or PFI) to interpret the predictions of the best
+        (Model-Based, SHAP or PFI) to interpret the predictions of the best
         performing model.
 
         Parameters
@@ -308,7 +309,7 @@ class SequentialAnalysis:
         Returns
         -------
         Type
-            The explainability class (SHAP or PFI) to be used.
+            The explainability class (Model-Based, SHAP or PFI) to be used.
 
         Raises
         ------
@@ -316,13 +317,14 @@ class SequentialAnalysis:
             If the specified explainability algorithm is not supported.
         """
         explainability_classes = {
+            'model_based': ModelBasedFeatureImportance,
             'shap': ShapFeatureImportance,
             'pfi': PFIFeatureImportance
         }
         if self.explainability_algorithm not in explainability_classes:
             raise ValueError(
                 f"Algorithm {self.explainability_algorithm} not supported. "
-                "Please choose from 'shap' or 'pfi'."
+                "Please choose from 'model_based', 'shap' or 'pfi'."
             )
         return explainability_classes[self.explainability_algorithm]
 
