@@ -1,4 +1,5 @@
 import warnings
+from abc import ABC
 from typing import Optional, Dict, Union, List, Tuple
 
 import pandas as pd
@@ -21,7 +22,7 @@ from ..utils import combine_data_and_labels
 warnings.filterwarnings('ignore')
 
 
-class ClassificationModel:
+class ClassificationModel(ABC):
     """
     A class for training and evaluating binary classification models to distinguish between real and synthetic data.
 
