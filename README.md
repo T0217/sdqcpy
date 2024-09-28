@@ -5,6 +5,7 @@
 
 - [Features](#features)
 - [Installation](#installation) 
+- [Results Display](#results-display)
 - [Usage](#usage)
     - [Demo](#demo)
     - [Data Synthesis](#data-synthesis)
@@ -13,11 +14,12 @@
 
 ## Features
 
-SDQCPy offers a comprehensive toolkit for synthetic data generation, quality assessment, and analysis:
+`SDQCPy` offers a comprehensive toolkit for synthetic data generation, quality assessment, and analysis:
 
 1. **Data Synthesis**: Generate synthetic data using various models.
 2. **Quality Evaluation**: Assess synthetic data quality through statistical tests, classification metrics, explainability analysis, and causal inference.
 3. **End-to-End Analysis**: Perform holistic analysis by integrating multiple evaluation methods to provide a comprehensive view of synthetic data quality.
+4. **Results Display**: Store the results in a HTML file.
 
 ## Installation
 ***You can install `SDQCPy` using pip:***
@@ -32,6 +34,15 @@ git clone https://github.com/T0217/sdqcpy.git
 cd sdqcpy
 pip install -e .
 ```
+
+## Results Display
+
+`SDQCPy` provides a `SequentialAnalysis` class to perform the sequential analysis and store the results in a HTML file.
+
+[Sample Report](./Results%20Display/sample%20report.html)
+
+![Sample Result](./Results%20Display/sample%20result.jpg)
+
 
 ## Usage
 
