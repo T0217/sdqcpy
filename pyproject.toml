@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sdqcpy"
-version = "0.2.0"
+version = "1.0.0"
 description = "SDQCPy is a comprehensive Python package designed for synthetic data management, quality control, and validation."
 authors = [
     {name = "T0217", email = "tianyanggong17@outlook.com"},
