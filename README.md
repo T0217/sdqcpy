@@ -39,8 +39,6 @@ pip install -e .
 
 `SDQCPy` provides a `SequentialAnalysis` class to perform the sequential analysis and store the results in a HTML file.
 
-[Sample Report](./Results%20Display/sample%20report.html)
-
 ![Sample Result](./Results%20Display/sample%20result.jpg)
 
 
