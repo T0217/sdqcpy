@@ -87,7 +87,7 @@ sequential.visualize_html(output_path)
 
 `SDQCPy` supports various methods, the implementation of these methods are using [`ydata-synthetic`](https://github.com/ydataai/ydata-synthetic) and [`SDV`](https://github.com/sdv-dev/SDV).
 
->   [!Tip]
+>   [!TIP]
 >
 >   ***We only display simple code here, and the parameters of each model can be further modified as needed.***
 
@@ -101,10 +101,10 @@ sequential.visualize_html(output_path)
     ydata_synth = YDataSynthesizer(data=raw_data)
     synthetic_data = ydata_synth.generate()
     ```
-    
-    >   [!WARNING]
-    >
-    >   ***In the latest version, [`ydata-synthetic`](https://github.com/ydataai/ydata-synthetic) has switched to using [ydata-sdk](https://github.com/ydataai/ydata-sdk). However, since synthetic data is only a supplementary feature of this library, it has not been updated yet.***
+
+>   [!IMPORTANT]
+>
+>   ***In the latest version, [`ydata-synthetic`](https://github.com/ydataai/ydata-synthetic) has switched to using [ydata-sdk](https://github.com/ydataai/ydata-sdk). However, since synthetic data is only a supplementary feature of this library, it has not been updated yet.***    
 
 - **SDV Synthesizer**
 
@@ -119,6 +119,7 @@ sequential.visualize_html(output_path)
 
 ## Workflow
 `SDQCPy` use the process shown below to perform the quality check and analysis:
+
 ```mermaid
 ---
 title Main Idea

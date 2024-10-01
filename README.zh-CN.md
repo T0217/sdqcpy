@@ -83,7 +83,7 @@ sequential.visualize_html(output_path)
 
 `SDQCPy` 提供了多种生成合成数据的方法，这些方法的实现使用[`ydata-synthetic`](https://github.com/ydataai/ydata-synthetic) 和 [`SDV`](https://github.com/sdv-dev/SDV)。
 
-> [!Tip]
+> [!TIP]
 >
 >   ***本库仅展示简单代码，每个模型的参数可以根据您的需求进行进一步修改。***
 
@@ -98,9 +98,9 @@ sequential.visualize_html(output_path)
     synthetic_data = ydata_synth.generate()
     ```
 
-    >   [!WARNING]
-    >
-    >   ***在最新版本中，[`ydata-synthetic`](https://github.com/ydataai/ydata-synthetic) 已经切换到使用 [ydata-sdk](https://github.com/ydataai/ydata-sdk)。然而，由于合成数据只是本库的补充功能，因此尚未更新。***
+>   [!IMPORTANT]
+>
+>   ***在最新版本中，[`ydata-synthetic`](https://github.com/ydataai/ydata-synthetic) 已经切换到使用 [ydata-sdk](https://github.com/ydataai/ydata-sdk)。然而，由于合成数据只是本库的补充功能，因此尚未更新。***
 
 - **SDV Synthesizer**
 
