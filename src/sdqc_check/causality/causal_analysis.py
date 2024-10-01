@@ -1,16 +1,12 @@
 import warnings
 from typing import Tuple
-
+from abc import ABC
 import numpy as np
 import pandas as pd
 
 import castle
 from castle.algorithms import (
-    DirectLiNGAM,
-    GAE,
-    GOLEM,
-    GraNDAG,
-    Notears
+    DirectLiNGAM, GAE, GOLEM, GraNDAG, Notears
 )
 from castle.metrics import MetricsDAG
 
@@ -18,7 +14,7 @@ from castle.metrics import MetricsDAG
 warnings.filterwarnings('ignore')
 
 
-class CausalAnalysis:
+class CausalAnalysis(ABC):
     """
     Causal analysis using various causal discovery algorithms.
 
@@ -37,6 +33,23 @@ class CausalAnalysis:
         The type of device to use (default is 'cpu').
     device_id : int, optional
         The ID of the device to use (default is 0).
+    
+    Attributes
+    ----------
+    raw_data : pd.DataFrame
+        The input raw data for causal analysis.
+    synthetic_data : pd.DataFrame
+        The input synthetic data for causal analysis.
+    model_name : str
+        The name of the causal discovery model to use.
+    random_seed : int
+        The random seed for reproducibility.
+    device_type : str
+        The type of device to use.
+    device_id : int
+        The ID of the device to use.
+    modelList : list
+        The list of available causal discovery models.
     """
 
     def __init__(
@@ -63,6 +76,9 @@ class CausalAnalysis:
             )
 
     def compare_adjacency_matrices(self) -> None:
+        """
+        Compare the adjacency matrices of raw and synthetic data using the specified causal discovery method.
+        """
         raw_matrix, synthetic_matrix = self.compute_causal_matrices()
         mt = MetricsDAG(raw_matrix, synthetic_matrix)
         return mt
