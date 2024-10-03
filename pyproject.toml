@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sdqcpy"
-version = "1.0.0"
+version = "1.0.1"
 description = "SDQCPy is a comprehensive Python package designed for synthetic data management, quality control, and validation."
 authors = [
     {name = "T0217", email = "tianyanggong17@outlook.com"},
@@ -45,7 +45,7 @@ dependencies = [
     "xgboost>=1.4.0",
     "lightgbm>=3.2.0",
     "ydata-synthetic>=1.0.0,<2.0.0",
-    "sdv>=0.17.0",
+    "sdv>=0.17.0,<1.17.0",
 ]
 
 [project.urls]
