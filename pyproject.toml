@@ -41,7 +41,6 @@ dependencies = [
     "jinja2>=3.0.0",
     "gcastle>=1.0.0",
     "shap>=0.41.0",
-    "lime>=0.2.0",
     "xgboost>=1.4.0",
     "lightgbm>=3.2.0",
     "ydata-synthetic>=1.0.0,<2.0.0",
